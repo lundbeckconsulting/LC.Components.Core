@@ -4,6 +4,8 @@
     @Description                  : Sample type for demonstration
 */
 
+using LundbeckConsulting.Components.Data;
+
 namespace LundbeckConsulting.Components.Core.Data.Models
 {
     public interface ISampleTypeTwo : IDataEntityBase

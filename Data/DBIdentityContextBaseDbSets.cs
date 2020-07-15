@@ -4,7 +4,7 @@
 */
 
 using LundbeckConsulting.Components.Core.Data.Models.Identity;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace LC.Components.Core.Data
 {

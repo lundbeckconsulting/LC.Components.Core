@@ -1,18 +1,20 @@
 ﻿/*
-        @Date			: 15.07.2020
-        @Author         : Stein Lundbeck
+    @Date			: 15.07.2020
+    @Author         : Stein Lundbeck
 */
 
 using LundbeckConsulting.Components.Extensions;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Web.Mvc;
+using AttributeDictionary = Microsoft.AspNetCore.Mvc.ViewFeatures.AttributeDictionary;
 
 namespace LundbeckConsulting.Components.Core
 {
-    public interface ITagBuilderCustom
+    public interface ITagBuilderCustom : IHtmlContent
     {
         /// <summary>
         /// If true a new line will be added after the tag builder content. Default is true
@@ -124,6 +126,11 @@ namespace LundbeckConsulting.Components.Core
         IEnumerable<ITagBuilderCustomInnerContent> InnerContent { get; }
 
         /// <summary>
+        /// Inner HTML
+        /// </summary>
+        IHtmlContentBuilder InnerHtml { get; }
+
+        /// <summary>
         /// Specifies if the tag should be encoded. Default is true
         /// </summary>
         bool Encode { get; set; }
@@ -146,7 +153,9 @@ namespace LundbeckConsulting.Components.Core
         /// <summary>
         /// The attribute elements
         /// </summary>
-        IEnumerable<ITagBuilderCustomAttribute> Attributes { get; }
+        IEnumerable<ITagBuilderCustomAttribute> CustomAttributes { get; }
+
+        AttributeDictionary Attributes { get; }
     }
 
     /// <summary>
@@ -338,7 +347,7 @@ namespace LundbeckConsulting.Components.Core
         public IEnumerable<string> AttributesToConsume => _consumeAttr;
         public IEnumerable<ITagBuilderCustomInnerContent> InnerContent => _innerContent;
         public IEnumerable<ITagBuilderCustom> Children => _content;
-        public new IEnumerable<ITagBuilderCustomAttribute> Attributes => _attributes;
+        public new IEnumerable<ITagBuilderCustomAttribute> CustomAttributes => _attributes;
         public bool Encode { get; set; } = false;
         public ContentPositions Position { get; set; } = ContentPositions.PostElement;
         public HtmlRender Render { get; set; } = HtmlRender.Cascade;

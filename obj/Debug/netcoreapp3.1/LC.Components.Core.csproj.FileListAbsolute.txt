@@ -6,3 +6,7 @@ P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.csp
 P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.AssemblyInfoInputs.cache
 P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.AssemblyInfo.cs
 P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.csproj.CopyComplete
+P:\LC TECH\DEV\LC.Components.Core\bin\Debug\netcoreapp3.1\LC.Components.Core.pdb
+P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.dll
+P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.pdb
+P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.csproj.CoreCompileInputs.cache

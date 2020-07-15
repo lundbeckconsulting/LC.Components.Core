@@ -1,6 +1,10 @@
-﻿using LundbeckConsulting.Components.Extensions;
+﻿/*
+    @Date			              : 15.07.2020
+    @Author                       : Stein Lundbeck
+*/
+
+using LundbeckConsulting.Components.Extensions;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System;
 using System.Collections.Generic;
 
 namespace LundbeckConsulting.Components.Core.TagHelpers
@@ -68,11 +72,6 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         DraggableValues Draggable { get; set; }
 
         /// <summary>
-        /// Processes all the base attributes
-        /// </summary>
-        void ProcessBaseAttributes();
-
-        /// <summary>
         /// List of the names of all base attributes
         /// </summary>
         IEnumerable<string> AttributesList { get; }
@@ -101,91 +100,6 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
             "lang",
             "draggable"
         };
-
-        public void ProcessBaseAttributes()
-        {
-            if (this.IdName.Null() && !this.Id.Null())
-            {
-                ProcessAttribute("id", this.Id);
-            }
-
-            if (this.IdName.Null() && !this.Name.Null())
-            {
-                ProcessAttribute("name", this.Name);
-            }
-
-            if (!this.IdName.Null())
-            {
-                ProcessAttribute("id", this.IdName);
-                ProcessAttribute("name", this.IdName);
-            }
-
-            if (!this.Class.Null())
-            {
-                ProcessAttribute("class", this.Class, true);
-            }
-
-            if (!this.Style.Null())
-            {
-                ProcessAttribute("style", this.Style, true);
-            }
-
-            if (!this.Title.Null())
-            {
-                ProcessAttribute("title", this.Title);
-            }
-
-            if (!this.Alt.Null())
-            {
-                ProcessAttribute("alt", this.Alt);
-            }
-
-            if (!this.Role.Null())
-            {
-                ProcessAttribute("role", this.Role.ToLower());
-            }
-
-            if (!this.For.Null())
-            {
-                ProcessAttribute("for", this.For);
-            }
-
-            if (this.TabIndex > -1)
-            {
-                ProcessAttribute("tabindex", this.TabIndex.ToString());
-            }
-
-            if (!this.Lang.Null())
-            {
-                ProcessAttribute("lang", this.Lang);
-            }
-
-            ProcessAttribute("draggable", this.Draggable.ToLower());
-
-            foreach (TagHelperAttribute attr in this.Context.AllAttributes)
-            {
-                if (attr.Name.StartsWith("data-") || attr.Name.StartsWith("aria-"))
-                {
-                    ProcessAttribute(attr.Name, attr.Value.ToString());
-                }
-            }
-
-            void ProcessAttribute(string name, string value, bool merge = false)
-            {
-                if (AttributeExists(name))
-                {
-                    ITagHelperCustomAttribute attr = GetAttribute(name);
-                    string val = value;
-
-                    if (merge)
-                    {
-                        attr = new TagHelperCustomAttribute(name, value, false);
-                    }
-
-                    ReplaceAttribute(attr);
-                }
-            }
-        }
 
         public bool IsBaseAttribute(string name) => this.AttributesList.Exists(attr => attr == name);
 

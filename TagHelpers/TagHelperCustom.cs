@@ -1,15 +1,18 @@
-﻿using LundbeckConsulting.Components.Extensions;
-using LundbeckConsulting.Components.Repos;
+﻿/*
+    @Date			              : 15.07.2020
+    @Author                       : Stein Lundbeck
+*/
+
+using LundbeckConsulting.Components.Core.Repos;
+using LundbeckConsulting.Components.Extensions;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 using ViewDataDictionary = Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary;
 
@@ -28,21 +31,20 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         /// <summary>
         /// Processes content, base attributes. Doesn't keep original attributes and doesn't exclude any attribute
         /// </summary>
-        Task Process();
+        Task ProcessCustom();
 
         /// <summary>
         /// Processes content, base attributes and doesn't keep original attributes
         /// </summary>
         /// <param name="attributeToExclude">Name of attributes that shouldn't be included</param>
-        Task Process(IEnumerable<string> attributeToExclude);
+        Task ProcessCustom(IEnumerable<string> attributeToExclude);
 
         /// <summary>
         /// Processes content and attributes
         /// </summary>
-        /// <param name="processBaseAttributes">Indicates if the base attributes should be processed</param>
         /// <param name="keepAttributes">Indicates if original attributes will be included</param>
         /// <param name="attributesToExclude">Names of attributes to exclude</param>
-        Task Process(bool processBaseAttributes, bool keepAttributes = false, IEnumerable<string> attributesToExclude = default);
+        Task ProcessCustom(bool keepAttributes = false, IEnumerable<string> attributesToExclude = default);
 
         /// <summary>
         /// Current tag helper context
@@ -201,7 +203,6 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         private TagHelperContent _innerContent = default;
         private bool _preProcessed = false;
 
-
         public TagHelperCustom(ITagHelperRepo tagHelperRepo, IHtmlHelper htmlHelper)
         {
             _repo = tagHelperRepo;
@@ -229,19 +230,20 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
             _preProcessed = true;
         }
 
-        public async Task Process()
-        {
-            await Process(default);
-        }
+        public async Task ProcessCustom() => await ProcessCustom(default);
 
-        public async Task Process(IEnumerable<string> excludeAttributes) => await Process(true, false, excludeAttributes);
+        public async Task ProcessCustom(IEnumerable<string> excludeAttributes) => await ProcessCustom(false, excludeAttributes);
 
-        public async Task Process(bool processBaseAttributes, bool keepAttributes, IEnumerable<string> excludeAttributes = default)
+        public async Task ProcessCustom(bool keepAttributes, IEnumerable<string> excludeAttributes = default)
         {
             if (!_preProcessed)
             {
-                throw new InvalidOperationException("The method PreProcess hasn't been invoked and must be invoked before the Process method");
+                throw new InvalidOperationException("The function PreProcess must be invoked before the calling Process");
             }
+
+            this.HelperRepo.ProcessCustomTagHelper(this, keepAttributes, excludeAttributes);
+
+            await base.ProcessAsync(this.Context, this.Output);
         }
 
         public void AddContent(ITagBuilderCustom tag)
@@ -286,11 +288,9 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
 
         public void RemoveAttribute(string name)
         {
-            ITagHelperCustomAttribute attr = GetAttribute(name);
-
             if (AttributeExists(name))
             {
-                _attributes.Remove(attr);
+                _attributes.Remove(GetAttribute(name));
             }
         }
 

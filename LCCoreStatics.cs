@@ -1,7 +1,52 @@
 ﻿namespace LundbeckConsulting.Components.Core
 {
-    public static class CoreStatics
+    /// <summary>
+    /// Different easy access functions
+    /// </summary>
+    public static class LCCoreStatics
     {
+        /// <summary>
+        /// Gets the name of the tag equal to format
+        /// </summary>
+        /// <param name="format">Format to process</param>
+        /// <returns>Tab with type based on format</returns>
+        public static string GetHtmlTextContentTagName(HtmlTextContentFormats format)
+        {
+            string result = string.Empty;
+
+            switch (format)
+            {
+                case HtmlTextContentFormats.Article:
+                    result = "article";
+                    break;
+
+                case HtmlTextContentFormats.Div:
+                    result = "div";
+                    break;
+
+                case HtmlTextContentFormats.Section:
+                    result = "section";
+                    break;
+
+                case HtmlTextContentFormats.Span:
+                    result = "span";
+                    break;
+
+                case HtmlTextContentFormats.Inserted:
+                    result = "ins";
+                    break;
+
+                case HtmlTextContentFormats.Paragraph:
+                    result = "p";
+                    break;
+
+                case HtmlTextContentFormats.PreFormatted:
+                    result = "pre";
+                    break;
+            }
+
+            return result;
+        }
     }
 
     /// <summary>
@@ -231,5 +276,20 @@
         PreContent,
         PostContent,
         PostElement
+    }
+
+
+    /// <summary>
+    /// Type of html tags that can contain ordinary textual content
+    /// </summary>
+    public enum HtmlTextContentFormats
+    {
+        Article,
+        Div,
+        Section,
+        Span,
+        Inserted,
+        Paragraph,
+        PreFormatted
     }
 }

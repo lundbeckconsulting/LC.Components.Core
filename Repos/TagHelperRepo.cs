@@ -10,9 +10,9 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Text;
 
-namespace LundbeckConsulting.Components.Repos
+namespace LundbeckConsulting.Components.Core.Repos
 {
-    public interface ITagHelperRepo : IRepoCoreBase
+    public interface ITagHelperRepo : IRepoCoreBase, ITagHelperRepoCustomProcess
     {
         /// <summary>
         /// Gets a string representation of the application media type
@@ -56,11 +56,11 @@ namespace LundbeckConsulting.Components.Repos
     /// <summary>
     /// Contains methods that helps developing of custom tag helpers
     /// </summary>
-    public sealed class TagHelperRepo : RepoCoreBase, ITagHelperRepo
+    public sealed partial class TagHelperRepo : RepoCoreBase, ITagHelperRepo
     {
         public TagHelperRepo(IHttpContextAccessor httpContext, IConfiguration config) : base(httpContext, config)
         {
-
+            
         }
 
         public string GetMediaApplicationTypesValue(MediaApplicationTypes type)

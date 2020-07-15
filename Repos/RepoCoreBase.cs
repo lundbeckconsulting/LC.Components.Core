@@ -3,10 +3,11 @@
     @Author                       : Stein Lundbeck
 */
 
+using LundbeckConsulting.Components.Repos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace LundbeckConsulting.Components.Repos
+namespace LundbeckConsulting.Components.Core.Repos
 {
     public interface IRepoCoreBase : IRepoBase
     {

@@ -75,7 +75,7 @@ namespace LundbeckConsulting.Components.Core
             {
                 string val = this.Encode ? WebUtility.HtmlEncode(this.Value) : this.Value;
 
-                return new TagHelperAttribute(this.Name, this.Value, this.ValueStyle);
+                return new TagHelperAttribute(this.Name, val, this.ValueStyle);
             }
         }
     }
