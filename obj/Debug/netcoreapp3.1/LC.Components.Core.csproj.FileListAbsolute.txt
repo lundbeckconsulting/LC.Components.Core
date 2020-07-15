@@ -1,0 +1,8 @@
+P:\LC TECH\DEV\LC.Components.Core\bin\Debug\netcoreapp3.1\LC.Components.Core.deps.json
+P:\LC TECH\DEV\LC.Components.Core\bin\Debug\netcoreapp3.1\LC.Components.Core.dll
+P:\LC TECH\DEV\LC.Components.Core\bin\Debug\netcoreapp3.1\LC.Components.dll
+P:\LC TECH\DEV\LC.Components.Core\bin\Debug\netcoreapp3.1\LC.Components.pdb
+P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.csprojAssemblyReference.cache
+P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.AssemblyInfoInputs.cache
+P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.AssemblyInfo.cs
+P:\LC TECH\DEV\LC.Components.Core\obj\Debug\netcoreapp3.1\LC.Components.Core.csproj.CopyComplete
