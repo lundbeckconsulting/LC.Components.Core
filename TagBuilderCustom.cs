@@ -109,6 +109,12 @@ namespace LundbeckConsulting.Components.Core
         bool AttributeExists(string name);
 
         /// <summary>
+        /// Converts custom attribute to and adds standard tag builder attributes
+        /// </summary>
+        /// <returns>Count of converted attributes</returns>
+        int ConvertCustomAttributes();
+
+        /// <summary>
         /// Adds a CSS class
         /// </summary>
         /// <param name="value">Name of CSS class</param>
@@ -269,6 +275,7 @@ namespace LundbeckConsulting.Components.Core
         {
             _innerContent = new Collection<ITagBuilderCustomInnerContent>();
 
+            this.TagRenderMode = mode;
             this.Encode = encode;
             this.ConsumeAttributes = consumeAttributes;
             this.Position = position;
@@ -330,6 +337,16 @@ namespace LundbeckConsulting.Components.Core
             }
         }
 
+        public int ConvertCustomAttributes()
+        {
+            foreach(IAttributeCustom attr in this.CustomAttributes)
+            {
+                this.Attributes.Add(attr.Attribute);
+            }
+
+            return this.CustomAttributes.Count();
+        }
+
         public void AddInnerContent(ITagBuilderCustomInnerContent content) => _innerContent.Add(content);
 
         public void AddInnerContent(string content, bool encode = false) => AddInnerContent(new TagBuilderCustomInnerContent() { Content = new HtmlString(content), Encode = encode, AppendContent = true });
@@ -347,7 +364,7 @@ namespace LundbeckConsulting.Components.Core
         public IEnumerable<string> AttributesToConsume => _consumeAttr;
         public IEnumerable<ITagBuilderCustomInnerContent> InnerContent => _innerContent;
         public IEnumerable<ITagBuilderCustom> Children => _content;
-        public new IEnumerable<ITagBuilderCustomAttribute> CustomAttributes => _attributes;
+        public IEnumerable<ITagBuilderCustomAttribute> CustomAttributes => _attributes;
         public bool Encode { get; set; } = false;
         public ContentPositions Position { get; set; } = ContentPositions.PostElement;
         public HtmlRender Render { get; set; } = HtmlRender.Cascade;

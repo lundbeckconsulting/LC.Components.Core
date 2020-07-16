@@ -292,4 +292,16 @@
         Paragraph,
         PreFormatted
     }
+
+    /// <summary>
+    /// Indicates the relative importance of the element
+    /// </summary>
+    public enum LinkTagImportanceTypes 
+    { 
+        None,
+        Auto,
+        High,
+        Low
+    }
+
 }

@@ -4,7 +4,6 @@
 */
 
 using LC.Components.Core.Data.Models.Identity;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace LundbeckConsulting.Components.Core.Data
@@ -32,11 +31,11 @@ namespace LundbeckConsulting.Components.Core.Data
     /// <summary>
     /// Provides access to the Identity DB context and db workers
     /// </summary>
-    public sealed class DBIdentityContextAccessor : DisposableBase, IDBIdentityContextAccessor
+    public sealed class DBIdentityContextAccessor : IDBIdentityContextAccessor
     {
         private readonly IDBIdentityContextBase _context;
 
-        public DBIdentityContextAccessor(IDBIdentityContextBase context) : base(Marshal.GetIUnknownForObject(context))
+        public DBIdentityContextAccessor(IDBIdentityContextBase context)
         {
             _context = context;
         }

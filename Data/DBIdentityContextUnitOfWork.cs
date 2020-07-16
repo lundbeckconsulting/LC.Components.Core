@@ -4,7 +4,6 @@
 */
 
 using LC.Components.Core.Data.Models.Identity;
-using LundbeckConsulting.Components.Data;
 using LundbeckConsulting.Components.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +11,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace LundbeckConsulting.Components.Core.Data
@@ -181,9 +179,9 @@ namespace LundbeckConsulting.Components.Core.Data
         DbSet<TEntity> DbSet { get; }
     }
 
-    public sealed class DBIdentityContextUnitOfWork<TEntity> : DisposableBase, IDBIdentityContextUnitOfWork<TEntity> where TEntity : class, IDataIdentityEntityBase
+    public sealed class DBIdentityContextUnitOfWork<TEntity> : IDBIdentityContextUnitOfWork<TEntity> where TEntity : class, IDataIdentityEntityBase
     {
-        public DBIdentityContextUnitOfWork(IDBIdentityContextBase context) : base(Marshal.GetIUnknownForObject(context))
+        public DBIdentityContextUnitOfWork(IDBIdentityContextBase context)
         {
             this.DBContext = (DBIdentityContextBase)context;
         }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Text;
+using Microsoft.AspNetCore.Hosting;
 
 namespace LundbeckConsulting.Components.Core.Repos
 {
@@ -50,7 +51,12 @@ namespace LundbeckConsulting.Components.Core.Repos
         /// </summary>
         /// <param name="path">Path to process</param>
         /// <returns>File type based on path</returns>
-        public FileTypes GetFileType(string path);
+        FileTypes GetFileType(string path);
+
+        /// <summary>
+        /// Current web host environment element
+        /// </summary>
+        IWebHostEnvironment Environment { get; }
     }
 
     /// <summary>
@@ -58,9 +64,11 @@ namespace LundbeckConsulting.Components.Core.Repos
     /// </summary>
     public sealed partial class TagHelperRepo : RepoCoreBase, ITagHelperRepo
     {
-        public TagHelperRepo(IHttpContextAccessor httpContext, IConfiguration config) : base(httpContext, config)
+        private readonly IWebHostEnvironment _env;
+
+        public TagHelperRepo(IHttpContextAccessor httpContext, IConfiguration config, IWebHostEnvironment environment) : base(httpContext, config)
         {
-            
+            _env = environment;
         }
 
         public string GetMediaApplicationTypesValue(MediaApplicationTypes type)
@@ -282,5 +290,7 @@ namespace LundbeckConsulting.Components.Core.Repos
 
             return result;
         }
+
+        public IWebHostEnvironment Environment => _env;
     }
 }

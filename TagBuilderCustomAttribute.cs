@@ -1,82 +1,60 @@
 ﻿/*
-    @Date			              : 15.07.2020
+    @Date			              : 16.07.2020
     @Author                       : Stein Lundbeck
 */
 
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Net;
-
 namespace LundbeckConsulting.Components.Core
 {
-    public interface ITagBuilderCustomAttribute
+    public interface ITagBuilderCustomAttribute : IAttributeCustom
     {
         /// <summary>
-        /// Name of the attribute
+        /// Indicates if the attribute value should merge with possible existing element
         /// </summary>
-        string Name { get; }
-        
-        /// <summary>
-        /// Value of the attribute
-        /// </summary>
-        string Value { get; }
-        
-        /// <summary>
-        /// Indicates if the should be encoded when added
-        /// </summary>
-        bool Encode { get; }
-
-        /// <summary>
-        /// The value style of the attribute
-        /// </summary>
-        HtmlAttributeValueStyle ValueStyle { get; set; }
-        
-        /// <summary>
-        /// A TagHelperAttribute representation 
-        /// </summary>
-        TagHelperAttribute Attribute { get; }
+        bool Merge { get; }
     }
 
-    public class TagBuilderCustomAttribute : ITagBuilderCustomAttribute
+    /// <summary>
+    /// Custom tag builder attribute element
+    /// </summary>
+    public class TagBuilderCustomAttribute : AttributeCustom, ITagBuilderCustomAttribute
     {
-        private readonly string _name;
-        private readonly string _value;
-        private readonly bool _encode;
+        private readonly bool _merge;
 
         /// <summary>
-        /// New custom attribute based on name and value. Value will not be encoded
+        /// Custom attribute element
         /// </summary>
-        /// <param name="name">Name of the attribute</param>
-        /// <param name="value">Value of the attribute</param>
+        /// <remarks>The attribute isn't encoded and merges with existing</remarks>
+        /// <param name="name">Name of attribute</param>
+        /// <param name="value">Attribute value</param>
         public TagBuilderCustomAttribute(string name, string value) : this(name, value, false)
         {
+            
+        }
+
+        /// <summary>
+        /// Custom attribute element
+        /// </summary>
+        /// <remarks>The attribute merges with existing</remarks>
+        /// <param name="name">Name of attribute</param>
+        /// <param name="value">Attribute value</param>
+        /// <param name="encode">Indicates if the attribute will be encoded</param>
+        public TagBuilderCustomAttribute(string name, string value, bool encode) : this(name, value, encode, true)
+        {
 
         }
 
         /// <summary>
-        /// New custom attribute based on name, value and encode
+        /// Custom attribute element
         /// </summary>
-        /// <param name="name">Name of the attribute</param>
-        /// <param name="value">Value of the attribute</param>
-        /// <param name="encode">Indicates if the value should be encoded when added</param>
-        public TagBuilderCustomAttribute(string name, string value, bool encode)
+        /// <param name="name">Name of attribute</param>
+        /// <param name="value">Attribute value</param>
+        /// <param name="encode">Indicates if the attribute will be encoded</param>
+        /// <param name="merge">Indicates if the value will merge with existing element</param>
+        public TagBuilderCustomAttribute(string name, string value, bool encode, bool merge) : base(name, value, encode)
         {
-            _name = name;
-            _value = value;
-            _encode = encode;
+            _merge = merge;
         }
 
-        public string Name => _name;
-        public string Value => _value;
-        public bool Encode => _encode;
-        public HtmlAttributeValueStyle ValueStyle { get; set; } = HtmlAttributeValueStyle.DoubleQuotes;
-        public TagHelperAttribute Attribute
-        {
-            get
-            {
-                string val = this.Encode ? WebUtility.HtmlEncode(this.Value) : this.Value;
-
-                return new TagHelperAttribute(this.Name, val, this.ValueStyle);
-            }
-        }
+        public bool Merge => _merge;
     }
 }

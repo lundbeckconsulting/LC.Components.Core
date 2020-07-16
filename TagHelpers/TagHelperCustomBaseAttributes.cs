@@ -72,6 +72,11 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         DraggableValues Draggable { get; set; }
 
         /// <summary>
+        /// Shortcut key to set focus on element
+        /// </summary>
+        string AccessKey { get; set; }
+
+        /// <summary>
         /// List of the names of all base attributes
         /// </summary>
         IEnumerable<string> AttributesList { get; }
@@ -98,7 +103,8 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
             "for",
             "tabindex",
             "lang",
-            "draggable"
+            "draggable",
+            "accesskey"
         };
 
         public bool IsBaseAttribute(string name) => this.AttributesList.Exists(attr => attr == name);
@@ -139,6 +145,9 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
 
         [HtmlAttributeName("draggable")]
         public DraggableValues Draggable { get; set; } = DraggableValues.Auto;
+
+        [HtmlAttributeName("accesskey")]
+        public string AccessKey { get; set; }
         #endregion
     }
 }

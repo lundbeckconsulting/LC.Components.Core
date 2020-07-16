@@ -113,28 +113,15 @@ namespace LundbeckConsulting.Components.Core.Repos
                 {
                     foreach (string attName in tag.AttributesToConsume)
                     {
-                        if (_customTag.AttributeExists(attName))
-                        {
-                            ITagHelperCustomAttribute attr = _customTag.GetAttribute(attName);
-                            string val = attr.Value;
+                        ITagBuilderCustomAttribute attr = tag.AttributeExists(attName) ? tag.GetAttribute(attName) : new TagBuilderCustomAttribute(attName, string.Empty);
+                        var att = GetProcessedAttribute(attr);
 
-                            if (attr.Merge && tag.AttributeExists(attName))
-                            {
-                                val += $" {tag.GetAttribute(attName).Value}";
-                            }
-
-                            if (attr.Encode)
-                            {
-                                val = HttpUtility.HtmlEncode(val);
-                            }
-
-                            tag.Attributes.Add(new KeyValuePair<string, string>(attName, val));
-                        }
+                        tag.Attributes.Add(att);
                     }
                 }
                 else
                 {
-                    foreach (ITagBuilderCustomAttribute attr in tag.CustomAttributes)
+                    foreach (IAttributeCustom attr in tag.CustomAttributes)
                     {
                         tag.Attributes.Add(attr.Attribute);
                     }
@@ -142,6 +129,27 @@ namespace LundbeckConsulting.Components.Core.Repos
             }
 
             return tag;
+        }
+
+        private KeyValuePair<string, string> GetProcessedAttribute(ITagBuilderCustomAttribute attribute)
+        {
+            string val = attribute.Value;
+
+            if (attribute.Merge && _customTag.AttributeExists(attribute.Name)) {
+                ITagHelperCustomAttribute attr = _customTag.GetAttribute(attribute.Name);
+
+                if (!attr.Value.IsEmpty())
+                {
+                    val = $"{val} {attr.Value}";
+                }
+            }
+
+            if (attribute.Encode)
+            {
+                val = HttpUtility.HtmlEncode(val);
+            }
+
+            return new KeyValuePair<string, string>(attribute.Name, val);
         }
 
         private bool ContentConsumesAttributes
@@ -291,12 +299,12 @@ namespace LundbeckConsulting.Components.Core.Repos
                             {
                                 if (!attr.Name.StartsWith(str.Replace("=>", "")))
                                 {
-                                    _customTag.AddAttribute(new TagHelperCustomAttribute(attr.Name, attr.Value.ToString(), true, false));
+                                    _customTag.AddAttribute(new TagHelperCustomAttribute(attr.Name, attr.Value.ToString(), true));
                                 }
                             }
                             else if (!nameOfAttributesToExlude.Exists(excl => excl == attr.Name)) //attribute name not in list
                             {
-                                _customTag.AddAttribute(new TagHelperCustomAttribute(attr.Name, attr.Value.ToString(), true, false));
+                                _customTag.AddAttribute(new TagHelperCustomAttribute(attr.Name, attr.Value.ToString(), true));
                             }
                         }
                     }
@@ -304,7 +312,7 @@ namespace LundbeckConsulting.Components.Core.Repos
                     {
                         foreach (TagHelperAttribute att in _customTag.Context.AllAttributes)
                         {
-                            _customTag.AddAttribute(new TagHelperCustomAttribute(att.Name, att.Value.ToString(), true, false));
+                            _customTag.AddAttribute(new TagHelperCustomAttribute(att.Name, att.Value.ToString(), true));
                         }
 
                         return;
