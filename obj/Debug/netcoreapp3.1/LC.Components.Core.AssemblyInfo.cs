@@ -17,8 +17,9 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Shared base classes and repos designed to help making custom ASP.NET Core compone" +
     "nts")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.2.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.2")]
-[assembly: System.Reflection.AssemblyProductAttribute("Different shared components for .NET Core projects")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.2.0-beta")]
+[assembly: System.Reflection.AssemblyProductAttribute("Different shared components used to create custom elements for .NET Core projects" +
+    "")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LC.Components.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.2.0")]
 [assembly: System.Resources.NeutralResourcesLanguageAttribute("en")]

@@ -2989,7 +2989,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "LC.Components/1.0.2": {
+      "LC.Components/1.0.2-beta": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -9134,7 +9134,7 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
-    "LC.Components/1.0.2": {
+    "LC.Components/1.0.2-beta": {
       "type": "project",
       "path": "../LC.Components/LC.Components.csproj",
       "msbuildProject": "../LC.Components/LC.Components.csproj"
@@ -9142,7 +9142,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "LC.Components >= 1.0.2",
+      "LC.Components >= 1.0.2-beta",
       "Microsoft.AspNetCore.Hosting.Abstractions >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.6",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 3.1.6"
@@ -9153,7 +9153,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.2",
+    "version": "1.0.2-beta",
     "restore": {
       "projectUniqueName": "P:\\LC TECH\\DEV\\LC.Components.Core\\LC.Components.Core.csproj",
       "projectName": "LC.Components.Core",

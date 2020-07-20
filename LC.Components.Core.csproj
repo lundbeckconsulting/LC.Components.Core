@@ -4,14 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.0.2</Version>
+    <Version>1.0.2.0-beta</Version>
     <Authors>Stein Lundbeck</Authors>
     <Company>Lundbeck Consulting</Company>
-    <Product>Different shared components for .NET Core projects</Product>
+    <Product>Different shared components used to create custom elements for .NET Core projects</Product>
     <Description>Shared base classes and repos designed to help making custom ASP.NET Core components</Description>
     <Copyright>2020</Copyright>
     <PackageProjectUrl>https://lundbeckconsulting.no</PackageProjectUrl>
-    <PackageIcon>lc-logo-md.png</PackageIcon>
+    <PackageIcon>lc-components-logo-md.png</PackageIcon>
     <RepositoryUrl>https://github.com/lundbeckconsulting/LC.Components.Core</RepositoryUrl>
     <RepositoryType>.NET Core class library</RepositoryType>
     <PackageTags>.NET Core, Lundbeck Consulting, Tag Helpers, Shared components, Identity, DBContext</PackageTags>
@@ -19,7 +19,7 @@
     <RootNamespace>LundbeckConsulting.Components.Core</RootNamespace>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <ApplicationIcon>lc-logo-min.ico</ApplicationIcon>
-    <PackageReleaseNotes>First official stable release</PackageReleaseNotes>
+    <PackageReleaseNotes>First beta</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\Misc\LC.Shared\IMAGE\lc-logo-md.png">
+    <None Include="..\..\Misc\LC.Shared\IMAGE\lc-components-logo-md.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

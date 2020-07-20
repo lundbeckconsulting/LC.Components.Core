@@ -6,9 +6,9 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "LC.Components.Core/1.0.2": {
+      "LC.Components.Core/1.0.2.0-beta": {
         "dependencies": {
-          "LC.Components": "1.0.2",
+          "LC.Components": "1.0.2-beta",
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.6",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.6"
@@ -1827,7 +1827,7 @@
           "System.Xml.XPath": "4.3.0"
         }
       },
-      "LC.Components/1.0.2": {
+      "LC.Components/1.0.2-beta": {
         "dependencies": {
           "Microsoft.AspNetCore.Html.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Mvc": "2.2.0",
@@ -1844,7 +1844,7 @@
     }
   },
   "libraries": {
-    "LC.Components.Core/1.0.2": {
+    "LC.Components.Core/1.0.2.0-beta": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -3221,7 +3221,7 @@
       "path": "system.xml.xpath.xdocument/4.3.0",
       "hashPath": "system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
     },
-    "LC.Components/1.0.2": {
+    "LC.Components/1.0.2-beta": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

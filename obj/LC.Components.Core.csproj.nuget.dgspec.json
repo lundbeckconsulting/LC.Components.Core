@@ -5,7 +5,7 @@
   },
   "projects": {
     "P:\\LC TECH\\DEV\\LC.Components.Core\\LC.Components.Core.csproj": {
-      "version": "1.0.2",
+      "version": "1.0.2-beta",
       "restore": {
         "projectUniqueName": "P:\\LC TECH\\DEV\\LC.Components.Core\\LC.Components.Core.csproj",
         "projectName": "LC.Components.Core",
@@ -81,7 +81,7 @@
       }
     },
     "P:\\LC TECH\\DEV\\LC.Components\\LC.Components.csproj": {
-      "version": "1.0.2",
+      "version": "1.0.2-beta",
       "restore": {
         "projectUniqueName": "P:\\LC TECH\\DEV\\LC.Components\\LC.Components.csproj",
         "projectName": "LC.Components",
