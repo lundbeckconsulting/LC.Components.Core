@@ -5,6 +5,7 @@
 
 using LundbeckConsulting.Components.Core.Repos;
 using LundbeckConsulting.Components.Extensions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -172,6 +173,11 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         void Clear();
 
         /// <summary>
+        /// The web host environment
+        /// </summary>
+        IWebHostEnvironment Environment { get; }
+
+        /// <summary>
         /// Element of type IHtmlHelper
         /// </summary>
         IHtmlHelper HtmlHelper { get; }
@@ -194,6 +200,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
     {
         private readonly ICollection<ITagBuilderCustom> _content = new Collection<ITagBuilderCustom>();
         private readonly ICollection<ITagHelperCustomAttribute> _attributes = new Collection<ITagHelperCustomAttribute>();
+        private readonly IWebHostEnvironment _env;
         private readonly HtmlRender _render = HtmlRender.Cascade;
         private readonly ITagHelperRepo _repo;
         private readonly IHtmlHelper _htmlHelper;
@@ -203,8 +210,9 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         private TagHelperContent _innerContent = default;
         private bool _preProcessed = false;
 
-        public TagHelperCustom(ITagHelperRepo tagHelperRepo, IHtmlHelper htmlHelper)
+        public TagHelperCustom(IWebHostEnvironment environment, ITagHelperRepo tagHelperRepo, IHtmlHelper htmlHelper)
         {
+            _env = environment;
             _repo = tagHelperRepo;
             _htmlHelper = htmlHelper;
         }
@@ -334,6 +342,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         public bool AttributeExists(ITagHelperCustomAttribute attribute) => _attributes.Exists(attr => attr.Attribute.Name == attribute.Attribute.Name);
         public ITagHelperCustomAttribute GetAttribute(string name) => _attributes.SingleOrDefault(attr => attr.Attribute.Name == name);
         public IEnumerable<ITagHelperCustomAttribute> Attributes => _attributes;
+        public IWebHostEnvironment Environment => _env;
         public ITagHelperRepo HelperRepo => _repo;
         public IHtmlHelper HtmlHelper => _htmlHelper;
     }

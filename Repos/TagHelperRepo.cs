@@ -237,7 +237,7 @@ namespace LundbeckConsulting.Components.Core.Repos
         {
             FileTypes result = FileTypes.None;
 
-            switch (new FileInfo(path).ExtensionName())
+            switch (new FileInfo(path).ExtensionCustom())
             {
                 case "JPG":
                 case "JPEG":
