@@ -18,7 +18,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <RootNamespace>LundbeckConsulting.Components.Core</RootNamespace>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <ApplicationIcon>lc-logo-min.ico</ApplicationIcon>
+    <ApplicationIcon>lc-logo.ico</ApplicationIcon>
     <PackageReleaseNotes>First beta</PackageReleaseNotes>
   </PropertyGroup>
 
@@ -45,6 +45,20 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.6.13" />
+  </ItemGroup>
+  
 </Project>
