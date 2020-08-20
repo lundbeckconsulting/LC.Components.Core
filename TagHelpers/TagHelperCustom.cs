@@ -68,7 +68,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         /// </summary>
         /// <param name="tag">Element to add</param>
         /// <param name="position">Where to add the element</param>
-        void AddContent(ITagBuilderCustom tag, ContentPositions position = ContentPositions.PostElement);
+        void AddContent(ITagBuilderCustom tag, ContentPosition position = ContentPosition.PostElement);
 
         /// <summary>
         /// Add multiple content elements
@@ -81,7 +81,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         /// </summary>
         /// <param name="position">Where to render the content</param>
         /// <param name="contents">Elements to add</param>
-        void AddContentRange(ContentPositions position, params ITagBuilderCustom[] contents);
+        void AddContentRange(ContentPosition position, params ITagBuilderCustom[] contents);
 
         /// <summary>
         /// Adds an attribute element
@@ -159,7 +159,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         /// <summary>
         /// Data from current View Context
         /// </summary>
-        /// <returns>View Contex's View Data</returns>
+        /// <returns>View Context View Data</returns>
         ViewDataDictionary ViewData { get; }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
             _content.Add(tag);
         }
 
-        public void AddContent(ITagBuilderCustom tag, ContentPositions position = ContentPositions.PostElement)
+        public void AddContent(ITagBuilderCustom tag, ContentPosition position = ContentPosition.PostElement)
         {
             tag.Position = position;
 
@@ -268,10 +268,10 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
 
         public void AddContentRange(params ITagBuilderCustom[] content)
         {
-            AddContentRange(ContentPositions.PostElement, content);
+            AddContentRange(ContentPosition.PostElement, content);
         }
 
-        public void AddContentRange(ContentPositions position, params ITagBuilderCustom[] content)
+        public void AddContentRange(ContentPosition position, params ITagBuilderCustom[] content)
         {
             foreach (ITagBuilderCustom tag in content)
             {

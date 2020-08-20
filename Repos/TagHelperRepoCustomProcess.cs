@@ -56,23 +56,23 @@ namespace LundbeckConsulting.Components.Core.Repos
 
                 switch (contentTag.Position)
                 {
-                    case ContentPositions.Body:
+                    case ContentPosition.Body:
                         AddTag(_customTag.Output.Content, contentTag);
                         break;
 
-                    case ContentPositions.PreElement:
+                    case ContentPosition.PreElement:
                         AddTag(_customTag.Output.PreElement, contentTag);
                         break;
 
-                    case ContentPositions.PreContent:
+                    case ContentPosition.PreContent:
                         AddTag(_customTag.Output.PreContent, contentTag);
                         break;
 
-                    case ContentPositions.PostContent:
+                    case ContentPosition.PostContent:
                         AddTag(_customTag.Output.PostContent, contentTag);
                         break;
 
-                    case ContentPositions.PostElement:
+                    case ContentPosition.PostElement:
                         AddTag(_customTag.Output.PostElement, contentTag);
                         break;
                 }

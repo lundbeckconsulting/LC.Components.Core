@@ -144,7 +144,7 @@ namespace LundbeckConsulting.Components.Core
         /// <summary>
         /// Where to render the element
         /// </summary>
-        ContentPositions Position { get; set; }
+        ContentPosition Position { get; set; }
 
         /// <summary>
         /// How to render the html
@@ -178,7 +178,7 @@ namespace LundbeckConsulting.Components.Core
         /// Creates a new element that will be added at post element and not encoded
         /// </summary>
         /// <param name="tagName">Tag type name</param>
-        public TagBuilderCustom(string tagName) : this(tagName, ContentPositions.PostElement, false)
+        public TagBuilderCustom(string tagName) : this(tagName, ContentPosition.PostElement, false)
         {
             
         }
@@ -209,18 +209,18 @@ namespace LundbeckConsulting.Components.Core
         /// </summary>
         /// <param name="tagName">Tag type name</param>
         /// <param name="encode">Indicates if the tag must be encoded</param>
-        public TagBuilderCustom(string tagName, bool encode) : this(tagName, ContentPositions.PostElement, encode)
+        public TagBuilderCustom(string tagName, bool encode) : this(tagName, ContentPosition.PostElement, encode)
         {
 
         }
 
         /// <summary>
-        /// Creates a new TagHelperCustom element with normal tag render moode
+        /// Creates a new TagHelperCustom element with normal tag render mode
         /// </summary>
         /// <param name="tagName">Tag type name</param>
         /// <param name="position">Where the tag will rendered</param>
         /// <param name="encode">Tag will be encoded if true</param>
-        public TagBuilderCustom(string tagName, ContentPositions position, bool encode) : this(tagName, position, TagRenderMode.Normal, encode)
+        public TagBuilderCustom(string tagName, ContentPosition position, bool encode) : this(tagName, position, TagRenderMode.Normal, encode)
         {
 
         }
@@ -231,7 +231,7 @@ namespace LundbeckConsulting.Components.Core
         /// <param name="tagName">Tag type name</param>
         /// <param name="mode">Tag render mode</param>
         /// <param name="encode">Tag will be encoded if true</param>
-        public TagBuilderCustom(string tagName, TagRenderMode mode, bool encode) : this(tagName, ContentPositions.PostElement, mode, false, encode)
+        public TagBuilderCustom(string tagName, TagRenderMode mode, bool encode) : this(tagName, ContentPosition.PostElement, mode, false, encode)
         {
 
         }
@@ -243,7 +243,7 @@ namespace LundbeckConsulting.Components.Core
         /// <param name="position">Where the tag will rendered</param>
         /// <param name="mode">Tag render mode</param>
         /// <param name="encode">Tag will be encoded if true</param>
-        public TagBuilderCustom(string tagName, ContentPositions position, TagRenderMode mode, bool encode) : this(tagName, position, mode, false, encode)
+        public TagBuilderCustom(string tagName, ContentPosition position, TagRenderMode mode, bool encode) : this(tagName, position, mode, false, encode)
         {
 
         }
@@ -256,7 +256,7 @@ namespace LundbeckConsulting.Components.Core
         /// <param name="mode">Tag render mode</param>
         /// <param name="consumeAttributes">List of names of attributes to consume</param>
         /// <param name="encode">Tag will be encoded if true</param>
-        public TagBuilderCustom(string tagName, ContentPositions position, TagRenderMode mode, bool consumeAttributes, bool encode) : this(tagName, position, mode, consumeAttributes, new string[0], encode, true)
+        public TagBuilderCustom(string tagName, ContentPosition position, TagRenderMode mode, bool consumeAttributes, bool encode) : this(tagName, position, mode, consumeAttributes, new string[0], encode, true)
         {
 
         }
@@ -271,7 +271,7 @@ namespace LundbeckConsulting.Components.Core
         /// <param name="attributesToConsume">List of names of attributes to consume if consumeAttributes is true. Consumes all attributes if set to default</param>
         /// <param name="encode">Tag will be encoded if true</param>
         /// <param name="applyNewLine">Indicates to add a new line after rendering tag</param>
-        public TagBuilderCustom(string tagName, ContentPositions position, TagRenderMode mode, bool consumeAttributes, IEnumerable<string> attributesToConsume, bool encode, bool applyNewLine) : base(tagName)
+        public TagBuilderCustom(string tagName, ContentPosition position, TagRenderMode mode, bool consumeAttributes, IEnumerable<string> attributesToConsume, bool encode, bool applyNewLine) : base(tagName)
         {
             _innerContent = new Collection<ITagBuilderCustomInnerContent>();
 
@@ -366,7 +366,7 @@ namespace LundbeckConsulting.Components.Core
         public IEnumerable<ITagBuilderCustom> Children => _content;
         public IEnumerable<ITagBuilderCustomAttribute> CustomAttributes => _attributes;
         public bool Encode { get; set; } = false;
-        public ContentPositions Position { get; set; } = ContentPositions.PostElement;
+        public ContentPosition Position { get; set; } = ContentPosition.PostElement;
         public HtmlRender Render { get; set; } = HtmlRender.Cascade;
     }
 }

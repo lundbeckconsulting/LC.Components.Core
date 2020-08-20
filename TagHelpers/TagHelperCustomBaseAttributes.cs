@@ -54,7 +54,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         /// <summary>
         /// Value of attribute Role
         /// </summary>
-        AriaRoleValues Role { get; set; }
+        AriaRole Role { get; set; }
 
         /// <summary>
         /// Tab index of element
@@ -69,7 +69,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         /// <summary>
         /// Indicates if the element is draggable
         /// </summary>
-        DraggableValues Draggable { get; set; }
+        DraggableValue Draggable { get; set; }
 
         /// <summary>
         /// Shortcut key to set focus on element
@@ -132,7 +132,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         public string Alt { get; set; }
 
         [HtmlAttributeName("role")]
-        public AriaRoleValues Role { get; set; }
+        public AriaRole Role { get; set; }
 
         [HtmlAttributeName("for")]
         public string For { get; set; }
@@ -144,7 +144,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         public string Lang { get; set; }
 
         [HtmlAttributeName("draggable")]
-        public DraggableValues Draggable { get; set; } = DraggableValues.Auto;
+        public DraggableValue Draggable { get; set; } = DraggableValue.Auto;
 
         [HtmlAttributeName("accesskey")]
         public string AccessKey { get; set; }

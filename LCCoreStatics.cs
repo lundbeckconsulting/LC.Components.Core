@@ -10,37 +10,37 @@
         /// </summary>
         /// <param name="format">Format to process</param>
         /// <returns>Tab with type based on format</returns>
-        public static string GetHtmlTextContentTagName(HtmlTextContentFormats format)
+        public static string GetHtmlTextContentTagName(HtmlTextContentFormat format)
         {
             string result = string.Empty;
 
             switch (format)
             {
-                case HtmlTextContentFormats.Article:
+                case HtmlTextContentFormat.Article:
                     result = "article";
                     break;
 
-                case HtmlTextContentFormats.Div:
+                case HtmlTextContentFormat.Div:
                     result = "div";
                     break;
 
-                case HtmlTextContentFormats.Section:
+                case HtmlTextContentFormat.Section:
                     result = "section";
                     break;
 
-                case HtmlTextContentFormats.Span:
+                case HtmlTextContentFormat.Span:
                     result = "span";
                     break;
 
-                case HtmlTextContentFormats.Inserted:
+                case HtmlTextContentFormat.Inserted:
                     result = "ins";
                     break;
 
-                case HtmlTextContentFormats.Paragraph:
+                case HtmlTextContentFormat.Paragraph:
                     result = "p";
                     break;
 
-                case HtmlTextContentFormats.PreFormatted:
+                case HtmlTextContentFormat.PreFormatted:
                     result = "pre";
                     break;
             }
@@ -61,7 +61,7 @@
     /// <summary>
     /// Supported values for the rel attribute
     /// </summary>
-    public enum RelTypes
+    public enum RelType
     {
         Icon,
         Stylesheet,
@@ -82,9 +82,31 @@
     }
 
     /// <summary>
+    /// Supported values for the Rel attribute of the anchor tag
+    /// </summary>
+    public enum AnchorRelType
+    {
+        None,
+        Alternate,
+        Author,
+        Bookmark,
+        Enclosure,
+        External,
+        Help,
+        License,
+        Next,
+        NoFollow,
+        NoReferrer,
+        NoOpener,
+        Prev,
+        Search,
+        Tag
+    }
+
+    /// <summary>
     /// Different jQuery versions
     /// </summary>
-    public enum jQueryVersions
+    public enum jQueryVersion
     {
         Standard,
         UI,
@@ -94,7 +116,7 @@
     /// <summary>
     /// Different jQuery info parts
     /// </summary>
-    public enum jQueryInfoParts
+    public enum jQueryInfoPart
     {
         Href,
         Integrity
@@ -103,7 +125,7 @@
     /// <summary>
     /// Valid values to the Role attribute
     /// </summary>
-    public enum AriaRoleValues
+    public enum AriaRole
     {
         None,
         Comment,
@@ -147,7 +169,7 @@
     /// <summary>
     /// Valid value for the draggable attribute
     /// </summary>
-    public enum DraggableValues
+    public enum DraggableValue
     {
         Auto,
         True,
@@ -157,7 +179,7 @@
     /// <summary>
     /// Form methods of the form tag
     /// </summary>
-    public enum TagFormMethods
+    public enum TagFormMethod
     {
         Delete,
         Get,
@@ -168,7 +190,7 @@
     /// <summary>
     /// Supported types of the button tag
     /// </summary>
-    public enum TagButtonTypes
+    public enum TagButtonType
     {
         Button,
         Reset,
@@ -178,19 +200,19 @@
     /// <summary>
     /// Supported targets for the anchor tag
     /// </summary>
-    public enum TagAnchorTargets
+    public enum TagAnchorTarget
     {
         None,
-        _blank,
-        _self,
-        _parent,
-        _top
+        Blank,
+        Self,
+        Parent,
+        Top
     }
 
     /// <summary>
     /// Valid importance items for a tag importance attribute
     /// </summary>
-    public enum TagImportanceAttributeValues
+    public enum TagImportanceAttributeValue
     {
         None,
         Auto,
@@ -201,7 +223,7 @@
     /// <summary>
     /// Supported positions for where to add new tag content
     /// </summary>
-    public enum TagContentPositions
+    public enum TagContentPosition
     {
         Body,
         PreElement,
@@ -213,7 +235,7 @@
     /// <summary>
     /// Supported values for the media application value
     /// </summary>
-    public enum MediaApplicationTypes
+    public enum MediaApplicationType
     {
         None,
         JavaScript,
@@ -228,7 +250,7 @@
     /// <summary>
     /// Supported values for the media type
     /// </summary>
-    public enum TextMediaTypes
+    public enum TextMediaType
     {
         None,
         HTML,
@@ -242,7 +264,7 @@
     /// <summary>
     /// Supported image media types
     /// </summary>
-    public enum ImageMediaTypes
+    public enum ImageMediaType
     {
         None,
         PNG,
@@ -256,7 +278,7 @@
     /// <summary>
     /// Supported font media types
     /// </summary>
-    public enum FontMediaTypes
+    public enum FontMediaType
     {
         Collection,
         OTF,
@@ -269,7 +291,7 @@
     /// <summary>
     /// Positions where content is added
     /// </summary>
-    public enum ContentPositions
+    public enum ContentPosition
     {
         Body,
         PreElement,
@@ -282,7 +304,7 @@
     /// <summary>
     /// Type of html tags that can contain ordinary textual content
     /// </summary>
-    public enum HtmlTextContentFormats
+    public enum HtmlTextContentFormat
     {
         Article,
         Div,
@@ -296,7 +318,7 @@
     /// <summary>
     /// Indicates the relative importance of the element
     /// </summary>
-    public enum LinkTagImportanceTypes 
+    public enum LinkTagImportanceType
     { 
         None,
         Auto,

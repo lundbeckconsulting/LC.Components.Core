@@ -20,38 +20,38 @@ namespace LundbeckConsulting.Components.Core.Repos
         /// </summary>
         /// <param name="type"></param>
         /// <returns>String value of application media type</returns>
-        string GetMediaApplicationTypesValue(MediaApplicationTypes type);
+        string GetMediaApplicationTypesValue(MediaApplicationType type);
         
         /// <summary>
         /// Get anchor target value of anchor target
         /// </summary>
         /// <returns>String value of anchor target</returns>
-        string GetAnchorTarget(TagAnchorTargets target);
+        string GetAnchorTarget(TagAnchorTarget target);
 
         /// <summary>
         /// Gets a string representation of the media text type
         /// </summary>
         /// <returns>String value of media text type</returns>
-        string GetTextMediaTypesValue(TextMediaTypes type);
+        string GetTextMediaTypesValue(TextMediaType type);
 
         /// <summary>
         /// Gets a string representation of the image media type
         /// </summary>
         /// <returns>String value of image media type</returns>
-        string GetImageMediaTypesValue(ImageMediaTypes type);
+        string GetImageMediaTypesValue(ImageMediaType type);
 
         /// <summary>
         /// Gets a string representation of the font media type
         /// </summary>
         /// <returns>String value of font media type</returns>
-        string GetFontMediaTypesValue(FontMediaTypes type);
+        string GetFontMediaTypesValue(FontMediaType type);
 
         /// <summary>
         /// Gets file type equal to path
         /// </summary>
         /// <param name="path">Path to process</param>
         /// <returns>File type based on path</returns>
-        FileTypes GetFileType(string path);
+        FileType GetFileType(string path);
 
         /// <summary>
         /// Current web host environment element
@@ -71,33 +71,33 @@ namespace LundbeckConsulting.Components.Core.Repos
             _env = environment;
         }
 
-        public string GetMediaApplicationTypesValue(MediaApplicationTypes type)
+        public string GetMediaApplicationTypesValue(MediaApplicationType type)
         {
             StringBuilder result = new StringBuilder("application/");
 
             switch (type)
             {
-                case MediaApplicationTypes.JavaScript:
+                case MediaApplicationType.JavaScript:
                     result.Append("JAVASCRIPT");
                     break;
 
-                case MediaApplicationTypes.HTTP:
+                case MediaApplicationType.HTTP:
                     result.Append("HTTP");
                     break;
 
-                case MediaApplicationTypes.XML:
+                case MediaApplicationType.XML:
                     result.Append("XML");
                     break;
 
-                case MediaApplicationTypes.JSON:
+                case MediaApplicationType.JSON:
                     result.Append("JSON");
                     break;
 
-                case MediaApplicationTypes.EcmaScript:
+                case MediaApplicationType.EcmaScript:
                     result.Append("ECMASCRIPT");
                     break;
 
-                case MediaApplicationTypes.NodeJS:
+                case MediaApplicationType.NodeJS:
                     result.Append("NODE");
                     break;
             }
@@ -105,59 +105,35 @@ namespace LundbeckConsulting.Components.Core.Repos
             return result.ToString();
         }
 
-        public string GetAnchorTarget(TagAnchorTargets target)
-        {
-            string result = string.Empty;
+        public string GetAnchorTarget(TagAnchorTarget target) => $"_{target.ToLower()}";
 
-            switch (target)
-            {
-                case TagAnchorTargets._blank:
-                    result = "_blank";
-                    break;
-
-                case TagAnchorTargets._parent:
-                    result = "_parent";
-                    break;
-
-                case TagAnchorTargets._self:
-                    result = "_self";
-                    break;
-
-                case TagAnchorTargets._top:
-                    result = "_top";
-                    break;
-            }
-
-            return result;
-        }
-
-        public string GetTextMediaTypesValue(TextMediaTypes type)
+        public string GetTextMediaTypesValue(TextMediaType type)
         {
             StringBuilder result = new StringBuilder("text/");
 
             switch(type)
             {
-                case TextMediaTypes.CSS:
+                case TextMediaType.CSS:
                     result.Append("CSS");
                     break;
 
-                case TextMediaTypes.CSV:
+                case TextMediaType.CSV:
                     result.Append("CSV");
                     break;
 
-                case TextMediaTypes.HTML:
+                case TextMediaType.HTML:
                     result.Append("HTML");
                     break;
 
-                case TextMediaTypes.XML:
+                case TextMediaType.XML:
                     result.Append("XML");
                     break;
 
-                case TextMediaTypes.DNS:
+                case TextMediaType.DNS:
                     result.Append("DNS");
                     break;
 
-                case TextMediaTypes.JAVASCRIPT:
+                case TextMediaType.JAVASCRIPT:
                     result.Append("JAVASCRIPT");
                     break;
             }
@@ -165,33 +141,33 @@ namespace LundbeckConsulting.Components.Core.Repos
             return result.ToString();
         }
 
-        public string GetImageMediaTypesValue(ImageMediaTypes type)
+        public string GetImageMediaTypesValue(ImageMediaType type)
         {
             StringBuilder result = new StringBuilder("image/");
 
             switch(type)
             {
-                case ImageMediaTypes.BMP:
+                case ImageMediaType.BMP:
                     result.Append("BMP");
                     break;
 
-                case ImageMediaTypes.JPEG:
+                case ImageMediaType.JPEG:
                     result.Append("JPEG");
                     break;
 
-                case ImageMediaTypes.PNG:
+                case ImageMediaType.PNG:
                     result.Append("PNG");
                     break;
 
-                case ImageMediaTypes.SVG:
+                case ImageMediaType.SVG:
                     result.Append("SVG");
                     break;
 
-                case ImageMediaTypes.TIFF:
+                case ImageMediaType.TIFF:
                     result.Append("TIFF");
                     break;
 
-                case ImageMediaTypes.GIF:
+                case ImageMediaType.GIF:
                     result.Append("GIF");
                     break;
             }
@@ -199,33 +175,33 @@ namespace LundbeckConsulting.Components.Core.Repos
             return result.ToString();
         }
 
-        public string GetFontMediaTypesValue(FontMediaTypes type)
+        public string GetFontMediaTypesValue(FontMediaType type)
         {
             StringBuilder result = new StringBuilder("font/");
 
             switch (type)
             {
-                case FontMediaTypes.Collection:
+                case FontMediaType.Collection:
                     result.Append("COLLECTION");
                     break;
 
-                case FontMediaTypes.OTF:
+                case FontMediaType.OTF:
                     result.Append("OTF");
                     break;
 
-                case FontMediaTypes.SFNT:
+                case FontMediaType.SFNT:
                     result.Append("SFNT");
                     break;
 
-                case FontMediaTypes.TTF:
+                case FontMediaType.TTF:
                     result.Append("TTF");
                     break;
 
-                case FontMediaTypes.WOFF:
+                case FontMediaType.WOFF:
                     result.Append("WOFF");
                     break;
 
-                case FontMediaTypes.WOFF2:
+                case FontMediaType.WOFF2:
                     result.Append("WOFF2");
                     break;
             }
@@ -233,9 +209,9 @@ namespace LundbeckConsulting.Components.Core.Repos
             return result.ToString();
         }
 
-        public FileTypes GetFileType(string path)
+        public FileType GetFileType(string path)
         {
-            FileTypes result = FileTypes.None;
+            FileType result = FileType.None;
 
             switch (new FileInfo(path).ExtensionCustom())
             {
@@ -244,47 +220,47 @@ namespace LundbeckConsulting.Components.Core.Repos
                 case "GIF":
                 case "PNG":
                 case "SVG":
-                    result = FileTypes.Image;
+                    result = FileType.Image;
                     break;
 
                 case "PDF":
-                    result = FileTypes.PDF;
+                    result = FileType.PDF;
                     break;
 
                 case "DOCX":
-                    result = FileTypes.Docx;
+                    result = FileType.Docx;
                     break;
 
                 case "TXT":
-                    result = FileTypes.Text;
+                    result = FileType.Text;
                     break;
 
                 case "ODT":
-                    result = FileTypes.OpenDocument;
+                    result = FileType.OpenDocument;
                     break;
 
                 case "RTF":
-                    result = FileTypes.RichText;
+                    result = FileType.RichText;
                     break;
 
                 case "MK":
-                    result = FileTypes.Markdown;
+                    result = FileType.Markdown;
                     break;
 
                 case "CSS":
-                    result = FileTypes.Style;
+                    result = FileType.Style;
                     break;
 
                 case "JS":
-                    result = FileTypes.JavaScript;
+                    result = FileType.JavaScript;
                     break;
 
                 case "CSHTML":
-                    result = FileTypes.View;
+                    result = FileType.View;
                     break;
 
                 case "SCSS":
-                    result = FileTypes.SASS;
+                    result = FileType.SASS;
                     break;
             }
 
