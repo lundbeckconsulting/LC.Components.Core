@@ -77,6 +77,26 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         string AccessKey { get; set; }
 
         /// <summary>
+        /// JavaScript function
+        /// </summary>
+        string OnClick { get; set; }
+
+        /// <summary>
+        /// JavaScript on mouse over
+        /// </summary>
+        string OnMouseOver { get; set; }
+
+        /// <summary>
+        /// JavaScript on mouse out
+        /// </summary>
+        string OnMouseOut { get; set; }
+
+        /// <summary>
+        /// JavaScript on mouse down
+        /// </summary>
+        string OnMouseDown { get; set; }
+
+        /// <summary>
         /// List of the names of all base attributes
         /// </summary>
         IEnumerable<string> AttributesList { get; }
@@ -104,7 +124,11 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
             "tabindex",
             "lang",
             "draggable",
-            "accesskey"
+            "accesskey",
+            "onclick",
+            "onmouseover",
+            "onmouseout",
+            "onmousedown"
         };
 
         public bool IsBaseAttribute(string name) => this.AttributesList.Exists(attr => attr == name);
@@ -148,6 +172,18 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
 
         [HtmlAttributeName("accesskey")]
         public string AccessKey { get; set; }
+
+        [HtmlAttributeName("onclick")]
+        public string OnClick { get; set; }
+
+        [HtmlAttributeName("onmouseover")]
+        public string OnMouseOver { get; set; }
+
+        [HtmlAttributeName("onmouseout")]
+        public string OnMouseOut { get; set; }
+
+        [HtmlAttributeName("onmousedown")]
+        public string OnMouseDown { get; set; }
         #endregion
     }
 }

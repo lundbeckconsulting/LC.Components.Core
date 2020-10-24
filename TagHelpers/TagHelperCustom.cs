@@ -27,25 +27,25 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
         /// <param name="context">Current context of derived tag helper</param>
         /// <param name="output">Current output of derived tag helper</param>
         /// <param name="suppressOutput">Value of Output.SuppressOutput</param>
-        Task PreProcess(TagHelperContext context, TagHelperOutput output, bool suppressOutput = true);
+        Task PreProcessAsync(TagHelperContext context, TagHelperOutput output, bool suppressOutput = true);
 
         /// <summary>
         /// Processes content, base attributes. Doesn't keep original attributes and doesn't exclude any attribute
         /// </summary>
-        Task ProcessCustom();
+        Task ProcessCustomAsync();
 
         /// <summary>
         /// Processes content, base attributes and doesn't keep original attributes
         /// </summary>
         /// <param name="attributeToExclude">Name of attributes that shouldn't be included</param>
-        Task ProcessCustom(IEnumerable<string> attributeToExclude);
+        Task ProcessCustomAsync(IEnumerable<string> attributeToExclude);
 
         /// <summary>
         /// Processes content and attributes
         /// </summary>
         /// <param name="keepAttributes">Indicates if original attributes will be included</param>
         /// <param name="attributesToExclude">Names of attributes to exclude</param>
-        Task ProcessCustom(bool keepAttributes = false, IEnumerable<string> attributesToExclude = default);
+        Task ProcessCustomAsync(bool keepAttributes = false, IEnumerable<string> attributesToExclude = default);
 
         /// <summary>
         /// Current tag helper context
@@ -217,7 +217,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
             _htmlHelper = htmlHelper;
         }
 
-        public async Task PreProcess(TagHelperContext context, TagHelperOutput output, bool suppressOutput = true)
+        public async Task PreProcessAsync(TagHelperContext context, TagHelperOutput output, bool suppressOutput = true)
         {
             if (_preProcessed)
             {
@@ -238,18 +238,18 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
             _preProcessed = true;
         }
 
-        public async Task ProcessCustom() => await ProcessCustom(default);
+        public async Task ProcessCustomAsync() => await ProcessCustomAsync(default);
 
-        public async Task ProcessCustom(IEnumerable<string> excludeAttributes) => await ProcessCustom(false, excludeAttributes);
+        public async Task ProcessCustomAsync(IEnumerable<string> excludeAttributes) => await ProcessCustomAsync(false, excludeAttributes);
 
-        public async Task ProcessCustom(bool keepAttributes, IEnumerable<string> excludeAttributes = default)
+        public async Task ProcessCustomAsync(bool keepAttributes, IEnumerable<string> excludeAttributes = default)
         {
             if (!_preProcessed)
             {
                 throw new InvalidOperationException("The function PreProcess must be invoked before the calling Process");
             }
 
-            this.HelperRepo.ProcessCustomTagHelper(this, keepAttributes, excludeAttributes);
+            this.HelperRepo.ProcessCustomTagHelper(this, keepAttributes);
 
             await base.ProcessAsync(this.Context, this.Output);
         }

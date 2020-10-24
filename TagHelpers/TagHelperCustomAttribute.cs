@@ -18,7 +18,7 @@ namespace LundbeckConsulting.Components.Core.TagHelpers
     public sealed class TagHelperCustomAttribute : AttributeCustom, ITagHelperCustomAttribute
     {
         /// <summary>
-        /// Creates a new atribute based on a custom tag builder attribute
+        /// Creates a new attribute based on a custom tag builder attribute
         /// </summary>
         /// <param name="attribute">Attribute to base element on</param>
         public TagHelperCustomAttribute(IAttributeCustom attribute) : this(attribute.Name, attribute.Value, attribute.Encode, attribute.ValueStyle)

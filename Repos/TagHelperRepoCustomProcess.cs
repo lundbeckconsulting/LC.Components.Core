@@ -57,23 +57,23 @@ namespace LundbeckConsulting.Components.Core.Repos
                 switch (contentTag.Position)
                 {
                     case ContentPosition.Body:
-                        AddTag(_customTag.Output.Content, contentTag);
+                        AddTag(_customTag.Output.Content, content);
                         break;
 
                     case ContentPosition.PreElement:
-                        AddTag(_customTag.Output.PreElement, contentTag);
+                        AddTag(_customTag.Output.PreElement, content);
                         break;
 
                     case ContentPosition.PreContent:
-                        AddTag(_customTag.Output.PreContent, contentTag);
+                        AddTag(_customTag.Output.PreContent, content);
                         break;
 
                     case ContentPosition.PostContent:
-                        AddTag(_customTag.Output.PostContent, contentTag);
+                        AddTag(_customTag.Output.PostContent, content);
                         break;
 
                     case ContentPosition.PostElement:
-                        AddTag(_customTag.Output.PostElement, contentTag);
+                        AddTag(_customTag.Output.PostElement, content);
                         break;
                 }
             }
@@ -83,6 +83,55 @@ namespace LundbeckConsulting.Components.Core.Repos
         {
             bool override_ = !ContentConsumesAttributes && isBase;
             ITagBuilderCustom result = ProcessAttributes(content, override_);
+
+            if (isBase)
+            {
+                if (!_customTag.Class.Null() && content.Attributes.ContainsKey("class"))
+                {
+                    MergeAndAdd("class", _customTag.Class, content.Attributes["class"]);
+                }
+
+                if (!_customTag.Id.Null() && _customTag.IdName.Null())
+                {
+                    content.Attributes.Add("id", _customTag.Id);
+                }
+
+                if (!_customTag.Name.Null() && _customTag.IdName.Null())
+                {
+                    content.Attributes.Add("name", _customTag.Name);
+                }
+
+                if (!_customTag.IdName.Null())
+                {
+                    content.Attributes.Add("id", _customTag.IdName);
+                    content.Attributes.Add("name", _customTag.IdName);
+                }
+
+                if (!_customTag.Title.Null())
+                {
+                    content.Attributes.Add("title", _customTag.Title);
+                }
+
+                if (!_customTag.OnClick.Null())
+                {
+                    content.Attributes.Add("onclick", _customTag.OnClick);
+                }
+
+                if (!_customTag.OnMouseOver.Null())
+                {
+                    content.Attributes.Add("onmouseover", _customTag.OnMouseOver);
+                }
+
+                if (!_customTag.OnMouseOut.Null())
+                {
+                    content.Attributes.Add("onmouseout", _customTag.OnMouseOut);
+                }
+
+                if (!_customTag.OnMouseDown.Null())
+                {
+                    content.Attributes.Add("onmousedown", _customTag.OnMouseDown);
+                }
+            }
 
             ProcessInnerContent(result);
 
@@ -100,6 +149,13 @@ namespace LundbeckConsulting.Components.Core.Repos
                         result.InnerHtml.AppendLine(tmp.ToHtmlString(tmp.Encode));
                         break;
                 }
+            }
+
+            void MergeAndAdd(string name, string valOne, string valTwo)
+            {
+                string val = $"{valOne} {valTwo}";
+                content.Attributes.Remove(name);
+                content.Attributes.Add(name, val);
             }
 
             return result;
