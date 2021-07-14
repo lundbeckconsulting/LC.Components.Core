@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Html;
 
-namespace LundbeckConsulting.Components.Core.Extensions
+namespace LundbeckConsulting.Components.Core.Components.Extensions
 {
     public static class IHtmlContentBuilderExstensions
     {

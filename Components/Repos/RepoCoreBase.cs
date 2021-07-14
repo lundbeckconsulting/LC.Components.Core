@@ -7,17 +7,17 @@ using LundbeckConsulting.Components.Repos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
-namespace LundbeckConsulting.Components.Core.Repos
+namespace LundbeckConsulting.Components.Core.Components.Repos
 {
     public interface IRepoCoreBase : IRepoBase
     {
         /// <summary>
-        /// The IP address based on current http context
+        /// The IP address based on current HTTP context
         /// </summary>
         IIPAddressCustom CurrentIP { get; }
         
         /// <summary>
-        /// Accessor to current http context
+        /// Accessor to current HTTP context
         /// </summary>
         IHttpContextAccessor HttpContext { get; }
                 

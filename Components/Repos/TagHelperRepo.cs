@@ -11,7 +11,7 @@ using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
 
-namespace LundbeckConsulting.Components.Core.Repos
+namespace LundbeckConsulting.Components.Core.Components.Repos
 {
     public interface ITagHelperRepo : IRepoCoreBase, ITagHelperRepoCustomProcess
     {
