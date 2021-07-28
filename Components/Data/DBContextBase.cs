@@ -19,17 +19,15 @@ namespace LundbeckConsulting.Components.Core.Data
     public abstract class DBContextBase : DbContext, IDBContextBase
     {
         private readonly IConfiguration _config;
-        private readonly DbContextOptions<DBContextBase> _options;
 
         public DBContextBase()
         {
 
         }
 
-        public DBContextBase(IConfiguration config, DbContextOptions<DBContextBase> options)
+        public DBContextBase(IConfiguration config, DbContextOptions<DBContextBase> options) : base(options)
         {
             _config = config;
-            _options = options;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
