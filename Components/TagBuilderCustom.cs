@@ -10,28 +10,58 @@ using System.Collections.ObjectModel;
 
 namespace LundbeckConsulting.Components.Core.Components
 {
-    public class TagBuilderCustom : TagBuilder
+    public interface ITagBuilderCustom
     {
-        private readonly ICollection<TagBuilderCustom> _children = new Collection<TagBuilderCustom>();
+        void AddChild(ITagBuilderCustom tag, params ITagBuilderCustom[] tags);
+        void AddChildRange(IEnumerable<ITagBuilderCustom> tags);
+        void AddAttribute(string name, string value);
+        void AddAttribute(ICustomAttribute attr, params ICustomAttribute[] attrs);
+        void AddAttributeRange(IEnumerable<ICustomAttribute> attrs);
+        void ApplyBlankLine();
+        void ApplyContent(string content, bool line = true);
+        void ApplyContent(IHtmlContent content, bool line = true);
+
+        /// <summary>
+        /// Defines if the content should be encoded when rendered
+        /// </summary>
+        bool Encode { get; set; }
+        bool ApplyNewLine { get; set; }
+        IEnumerable<ITagBuilderCustom> Children { get; }
+
+        /// <summary>
+        /// The position where the tag should be rendered
+        /// </summary>
+        ContentPosition Position { get; set; }
+        HtmlRender Render { get; set; }
+
+        /// <summary>
+        /// Defines if base parameters should be processed
+        /// </summary>
+        bool AttachParameters { get; set; }
+    }
+
+    public class TagBuilderCustom : TagBuilder, ITagBuilderCustom
+    {
+        private readonly ICollection<ITagBuilderCustom> _children = new Collection<ITagBuilderCustom>();
 
         public TagBuilderCustom(string tagName, ContentPosition position = ContentPosition.PostElement) : base(tagName)
         {
             this.Position = position;
         }
 
-        public void AddChild(TagBuilderCustom tag, params TagBuilderCustom[] tags)
+        public void AddChild(ITagBuilderCustom tag, params ITagBuilderCustom[] tags)
         {
             _children.Add(tag);
 
-            foreach(TagBuilderCustom tg in tags)
+            foreach(ITagBuilderCustom tg in tags)
             {
                 _children.Add(tg);
             }
         }
 
-        public void AddChildRange(IEnumerable<TagBuilderCustom> tags)
+        public void AddChildRange(IEnumerable<ITagBuilderCustom> tags)
         {
-            foreach(TagBuilderCustom tag in tags)
+            foreach(ITagBuilderCustom tag in tags)
             {
                 AddChild(tag);
             }
@@ -65,7 +95,9 @@ namespace LundbeckConsulting.Components.Core.Components
             }
         }
 
-        public void ApplyInnerContent(string content, bool line = true)
+        public void ApplyBlankLine() => this.InnerHtml.AppendHtmlLine("");
+
+        public void ApplyContent(string content, bool line = true)
         {
             if (line)
             {
@@ -77,7 +109,7 @@ namespace LundbeckConsulting.Components.Core.Components
             }
         }
 
-        public void ApplyInnerContent(IHtmlContent content, bool line = true)
+        public void ApplyContent(IHtmlContent content, bool line = true)
         {
             if (line)
             {
@@ -91,8 +123,9 @@ namespace LundbeckConsulting.Components.Core.Components
 
         public bool Encode { get; set; } = true;
         public bool ApplyNewLine { get; set; } = true;
-        public IEnumerable<TagBuilderCustom> Children => _children;
+        public IEnumerable<ITagBuilderCustom> Children => _children;
         public ContentPosition Position { get; set; } = ContentPosition.PostElement;
         public HtmlRender Render { get; set; } = HtmlRender.Cascade;
+        public bool AttachParameters { get; set; } = true;
     }
 }

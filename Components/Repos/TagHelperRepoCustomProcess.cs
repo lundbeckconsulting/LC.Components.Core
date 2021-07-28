@@ -61,7 +61,7 @@ namespace LundbeckConsulting.Components.Core.Components.Repos
 
         private TagBuilderCustom ProcessContent(TagBuilderCustom content, bool isBase)
         {
-            if (isBase)
+            if (isBase && content.AttachParameters)
             {
                 if (!_customTag.Class.Null())
                 {
@@ -84,9 +84,9 @@ namespace LundbeckConsulting.Components.Core.Components.Repos
                     content.AddAttribute("name", _customTag.IdName);
                 }
 
-                if (!_customTag.Title.Null())
+                if (!_customTag.SiteTitle.Null())
                 {
-                    content.AddAttribute("title", _customTag.Title);
+                    content.AddAttribute("title", _customTag.SiteTitle);
                 }
 
                 if (!_customTag.OnChange.Null())

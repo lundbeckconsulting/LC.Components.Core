@@ -3,7 +3,6 @@
     @Author                       : Stein Lundbeck
 */
 
-using LundbeckConsulting.Components.Core.Components;
 using LundbeckConsulting.Components.Core.Components.Repos;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -36,7 +35,7 @@ namespace LundbeckConsulting.Components.Core.Components.TagHelpers
         string IdName { get; set; }
         string Class { get; set; }
         string Style { get; set; }
-        string Title { get; set; }
+        string SiteTitle { get; set; }
         string Alt { get; set; }
         string Role { get; set; }
         string For { get; set; }
@@ -145,7 +144,7 @@ namespace LundbeckConsulting.Components.Core.Components.TagHelpers
         public string Style { get; set; }
 
         [HtmlAttributeName("title")]
-        public string Title { get; set; }
+        public string SiteTitle { get; set; }
 
         [HtmlAttributeName("onchange")]
         public string OnChange { get; set; }
