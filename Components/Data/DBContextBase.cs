@@ -4,25 +4,35 @@
     @Description                  : Base DBContext. All entities must inherit IDataEntityBase
 */
 
-using LundbeckConsulting.Components.Core.Data.Models;
+using LundbeckConsulting.Components.Extensions;
+using LundbeckConsulting.Components.Core.Components.Data.Models;
+using LundbeckConsulting.Components.Core.Components.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace LundbeckConsulting.Components.Core.Data
 {
     public interface IDBContextBase
     {
-        DbSet<SampleTypeOne> SampleTypeOne { get; set; }
-        DbSet<SampleTypeTwo> SampleTypeTwo { get; set; }
+        void AddEntity<TEntity>(string tableName) where TEntity : class, IDb;
+        void AddNamespaces(params string[] names);
+        string ConnectionString { get; }
+        DbSet<TEntity> GetDbSet<TEntity>() where TEntity : class, IDb;
     }
 
     public abstract class DBContextBase : DbContext, IDBContextBase
     {
+        private readonly string _connString;
         private readonly IConfiguration _config;
+        private readonly ArrayList _entities = new ArrayList();
+        private readonly ICollection<string> _namespaces = new Collection<string>();
 
-        public DBContextBase()
+        public DBContextBase(string connectionString)
         {
-
+            _connString = connectionString;
         }
 
         public DBContextBase(IConfiguration config, DbContextOptions<DBContextBase> options) : base(options)
@@ -30,22 +40,40 @@ namespace LundbeckConsulting.Components.Core.Data
             _config = config;
         }
 
+        public void AddEntity<TEntity>(string tableName) where TEntity : class, IDb => _entities.Add(new DBContextDbSet<TEntity>(tableName));
+        public void AddNamespaces(params string[] names) => _namespaces.AddRange(names);
+        public DbSet<TEntity> GetDbSet<TEntity>() where TEntity : class, IDb
+        {
+            DbSet<TEntity> result = default(DbSet<TEntity>);
+
+            foreach(IDBContextDbSet dbSet in _entities)
+            {
+                if (dbSet.EntityType == typeof(TEntity))
+                {
+                    result = ((DBContextDbSet<TEntity>)dbSet).DbSet;
+                }
+            }
+
+            return result;
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<SampleTypeOne>().ToTable("TypeOne");
-            builder.Entity<SampleTypeTwo>().ToTable("TypeTwo");
+            foreach(IDBContextDbSet entity in _entities)
+            {
+                entity.SetEntity(this, builder);
+            }
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             base.OnConfiguring(builder);
 
-            builder.UseSqlServer(_config.GetConnectionString("Default"));
+            builder.UseSqlServer(this.ConnectionString);
         }
 
-        public DbSet<SampleTypeOne> SampleTypeOne { get; set; }
-        public DbSet<SampleTypeTwo> SampleTypeTwo { get; set; }
+        public string ConnectionString => _connString;
     }
 }

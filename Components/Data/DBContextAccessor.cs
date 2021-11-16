@@ -3,7 +3,7 @@
     @Author			 : Stein Lundbeck
 */
 
-using LundbeckConsulting.Components.Data;
+using LundbeckConsulting.Components.Core.Components.Data.Models;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -15,7 +15,7 @@ namespace LundbeckConsulting.Components.Core.Data
         /// Unit of Work for TEntity
         /// </summary>
         /// <typeparam name="TEntity">Type to pass to Unit of Work</typeparam>
-        IDBContextUnitOfWork<TEntity> GetWorker<TEntity>() where TEntity : class, IDataEntityBase;
+        IDBContextUnitOfWork<TEntity> GetWorker<TEntity>() where TEntity : class, IDb;
 
         /// <summary>
         /// Assets DB Context
@@ -26,7 +26,7 @@ namespace LundbeckConsulting.Components.Core.Data
         /// Save changes to element of TEntity type
         /// </summary>
         /// <typeparam name="TEntity">Type of elements</typeparam>
-        Task SaveChanges<TEntity>() where TEntity : class, IDataEntityBase;
+        Task SaveChanges<TEntity>() where TEntity : class, IDb;
     }
 
     /// <summary>
@@ -40,12 +40,12 @@ namespace LundbeckConsulting.Components.Core.Data
         {
             _context = context;
         }
-        public IDBContextUnitOfWork<TEntity> GetWorker<TEntity>() where TEntity : class, IDataEntityBase
+        public IDBContextUnitOfWork<TEntity> GetWorker<TEntity>() where TEntity : class, IDb
         {
             return new DBContextUnitOfWork<TEntity>(this.DBContext);
         }
 
-        public async Task SaveChanges<TEntity>() where TEntity : class, IDataEntityBase
+        public async Task SaveChanges<TEntity>() where TEntity : class, IDb
         {
             await GetWorker<TEntity>().SaveChanges();
         }

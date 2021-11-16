@@ -3,7 +3,7 @@
         @Author			 : Stein Lundbeck
 */
 
-using LundbeckConsulting.Components.Data;
+using LundbeckConsulting.Components.Core.Components.Data.Models;
 using LundbeckConsulting.Components.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,21 +16,13 @@ using System.Threading.Tasks;
 
 namespace LundbeckConsulting.Components.Core.Data
 {
-    public interface IDBContextUnitOfWork<TEntity> where TEntity : class, IDataEntityBase
+    public interface IDBContextUnitOfWork<TEntity> where TEntity : class, IDb
     {
         /// <summary>
         /// Returns all elements that matches the query
         /// </summary>
         /// <param name="update">If true tracks changes to elements</param>
         Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate, bool update = false);
-
-        /// <summary>
-        /// Runs a query against TEntity
-        /// </summary>
-        /// <param name="predicate">Query to run against TEntity</param>
-        /// <param name="update">If true tracks changes to elements</param>
-        /// <returns>Result of query. Returns Default ff the query don't result in any rows</returns>
-        Task<IEnumerable<TEntity>> WhereOrDefault(Expression<Func<TEntity, bool>> predicate, bool update = false);
 
         /// <summary>
         /// Adds an entity
@@ -180,7 +172,7 @@ namespace LundbeckConsulting.Components.Core.Data
         DbSet<TEntity> DbSet { get; }
     }
 
-    public sealed class DBContextUnitOfWork<TEntity> : DisposableBase, IDBContextUnitOfWork<TEntity> where TEntity : class, IDataEntityBase
+    public sealed class DBContextUnitOfWork<TEntity> : DisposableBase, IDBContextUnitOfWork<TEntity> where TEntity : class, IDb
     {
         public DBContextUnitOfWork(IDBContextBase context) : base(Marshal.GetIUnknownForObject(context))
         {
@@ -198,18 +190,6 @@ namespace LundbeckConsulting.Components.Core.Data
         public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate, bool update = false)
         {
             var result = await this.DbSet.Where(predicate).ToListAsync();
-
-            if (update)
-            {
-                Update(result);
-            }
-
-            return result;
-        }
-
-        public async Task<IEnumerable<TEntity>> WhereOrDefault(Expression<Func<TEntity, bool>> predicate, bool update = false)
-        {
-            IEnumerable<TEntity> result = await this.DbSet.WhereOrDefaultAsync(predicate);
 
             if (update)
             {
