@@ -1,64 +1,23 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.0.2.0-beta</Version>
-    <Authors>Stein Lundbeck</Authors>
-    <Company>Lundbeck Consulting</Company>
-    <Product>Different shared components used to create custom elements for .NET Core projects</Product>
-    <Description>Shared base classes and repos designed to help making custom ASP.NET Core components</Description>
-    <Copyright>2020</Copyright>
-    <PackageProjectUrl>https://lundbeckconsulting.no</PackageProjectUrl>
-    <PackageIcon>lc-components-logo-md.png</PackageIcon>
-    <RepositoryUrl>https://github.com/lundbeckconsulting/LC.Components.Core</RepositoryUrl>
-    <RepositoryType>.NET Core class library</RepositoryType>
-    <PackageTags>.NET Core, Lundbeck Consulting, Tag Helpers, Shared components, Identity, DBContext</PackageTags>
-    <NeutralLanguage>en</NeutralLanguage>
-    <RootNamespace>LundbeckConsulting.Components.Core</RootNamespace>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <ApplicationIcon>lc-logo.ico</ApplicationIcon>
-    <PackageReleaseNotes>First beta</PackageReleaseNotes>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.6" />
-  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LC.Components\LC.Components.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\LC.Components\LC.Components.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\Misc\LC.Shared\IMAGE\lc-components-logo-md.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\LC.Components\LICENSE.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="LICENSE.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.6.13" />
-  </ItemGroup>
-  
 </Project>

@@ -4,14 +4,13 @@
     @Description                  : Base DBContext. All entities must inherit IDataEntityBase
 */
 
-using LundbeckConsulting.Components.Extensions;
-using LundbeckConsulting.Components.Core.Components.Data.Models;
 using LundbeckConsulting.Components.Core.Components.Data;
+using LundbeckConsulting.Components.Core.Components.Data.Models;
+using LundbeckConsulting.Components.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
 
 namespace LundbeckConsulting.Components.Core.Data
 {
